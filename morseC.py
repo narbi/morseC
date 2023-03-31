@@ -76,7 +76,7 @@ def morse_to_text(urlencode):
 		for item in morsecode:
 			if (key == morsecode[item]):
 				deciphered = deciphered + item
-	print deciphered 
+	print (deciphered) 
 
 def morse_to_hex(theMorse):
 	lohex = list(theMorse)
@@ -98,15 +98,15 @@ def hex_to_morse(theHex):
 
 
 def create_zip():
-	outerfile = raw_input("Give filename of container file (existing image) - eg: forest.png \n")
-	innerfile = raw_input("Give filename of hidden file (will be created) - eg: hidden.png \n")
-	message = raw_input("Give plaintext message to hide (only english characters and numbers) - eg: hello1 \n")
+	outerfile = input("Give filename of container file (existing image) - eg: forest.png \n")
+	innerfile = input("Give filename of hidden file (will be created) - eg: hidden.png \n")
+	message = input("Give plaintext message to hide (only english characters and numbers) - eg: hello1 \n")
 	try:
 		colors = text_to_hex(message)
 		infile = write_file(colors, innerfile)	
 		infname = innerfile.split('.')
 
-		print 'creating archive'
+		print ('creating archive')
 
 		with zipfile.ZipFile(infname[0]+'.zip', "w") as zf:
 			zf.write(innerfile)
@@ -119,19 +119,19 @@ def create_zip():
 
 
 def read_zip():
-	img = raw_input("Give filename of morseC to read :\n")
+	img = input("Give filename of morseC to read :\n")
 	try:
-		print 'unziping archive'
+		print ('unziping archive')
 		with zipfile.ZipFile(img, "r") as z:
 			contents = z.namelist()
 			extract = z.extractall()
 			read_file(contents[0])
 	except ValueError:
-		print "Something went badly wrong.. Now Exiting.."
+		print ("Something went badly wrong.. Now Exiting..")
 #------------------
 #		main
 #------------------
-choice = raw_input("Press 1 to create a morseC steganography or \nPress 2 to read a morseC steganography \n")
+choice = input("Press 1 to create a morseC steganography or \nPress 2 to read a morseC steganography \n")
 if (int(choice) == 1):
 	create_zip()
 elif (int(choice) == 2):
